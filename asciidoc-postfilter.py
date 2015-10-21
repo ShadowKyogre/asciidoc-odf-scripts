@@ -44,4 +44,4 @@ with open(sys.argv[1], 'rU') as f:
 				link.attrib['onclick'] = "this.parentNode.nextElementSibling.classList.toggle('visible')"
 				link.addnext(contents[anno_id])
 
-	print etree.tostring(orightml pretty_print=True)
+	print etree.tostring(orightml, pretty_print=True)
