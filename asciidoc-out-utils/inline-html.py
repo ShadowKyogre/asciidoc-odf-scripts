@@ -7,7 +7,12 @@ import sys
 from os import path, environ
 import re
 
-with open(sys.argv[1], 'r', encoding='utf-8') as f:
+if len(sys.argv) == 1:
+	target = sys.stdin
+else:
+	target = open(sys.argv[1], 'r', encoding='utf-8')
+
+with target  as f:
 	#f_contents = f.read().replace('\r', '')
 	f_contents = f.read()
 	inliner = Pynliner()

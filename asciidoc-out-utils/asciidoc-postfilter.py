@@ -5,7 +5,12 @@ from cssselect import GenericTranslator
 from os import environ
 import sys
 
-with open(sys.argv[1], 'r', encoding='utf-8') as f:
+if len(sys.argv) == 1:
+	target = sys.stdin
+else:
+	target = open(sys.argv[1], 'r', encoding='utf-8')
+
+with target as f:
 	orightml = html.parse(f).getroot()
 
 	find_annos = GenericTranslator().css_to_xpath('a[href^="#anno-"]')
