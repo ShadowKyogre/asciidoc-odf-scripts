@@ -1,3 +1,5 @@
+#!/usr/bin/env python2
+
 from lxml import html, etree
 from cssselect import GenericTranslator
 from os import environ
