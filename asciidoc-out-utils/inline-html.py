@@ -1,4 +1,5 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
+
 from pynliner import Pynliner
 # from lxml.html.soupparser import fromstring
 from lxml.html import fromstring, tostring
@@ -6,8 +7,9 @@ import sys
 from os import path, environ
 import re
 
-with open(sys.argv[1], 'rU') as f:
-	f_contents = f.read().replace('\r', '')
+with open(sys.argv[1], 'r', encoding='utf-8') as f:
+	#f_contents = f.read().replace('\r', '')
+	f_contents = f.read()
 	inliner = Pynliner()
 	root = fromstring(f_contents)
 
@@ -27,4 +29,4 @@ with open(sys.argv[1], 'rU') as f:
 	else:
 		inliner.with_cssString("body {color: black; background: white;}")
 
-	print inliner.from_string(tostring(root, pretty_print=True)).run()
+	print(inliner.from_string(tostring(root, pretty_print=True, encoding='unicode')).run())

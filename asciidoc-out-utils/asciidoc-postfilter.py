@@ -1,11 +1,11 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 from lxml import html, etree
 from cssselect import GenericTranslator
 from os import environ
 import sys
 
-with open(sys.argv[1], 'rU') as f:
+with open(sys.argv[1], 'r', encoding='utf-8') as f:
 	orightml = html.parse(f).getroot()
 
 	find_annos = GenericTranslator().css_to_xpath('a[href^="#anno-"]')
@@ -46,4 +46,4 @@ with open(sys.argv[1], 'rU') as f:
 				link.attrib['onclick'] = "this.parentNode.nextElementSibling.classList.toggle('visible')"
 				link.addnext(contents[anno_id])
 
-	print etree.tostring(orightml, pretty_print=True)
+	print(etree.tostring(orightml, encoding='unicode', pretty_print=True))
