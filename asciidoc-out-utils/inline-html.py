@@ -20,9 +20,14 @@ with target  as f:
 
 	for element in root.iter('link'):
 		if element.attrib['rel'] == 'stylesheet' and element.attrib['type'] == 'text/css':
-			with open(path.join(path.dirname(sys.argv[1]), element.attrib['href'])) as cssf:
-				cssf_contents = cssf.read()
-				inliner.with_cssString(cssf_contents)
+			if target is sys.stdin:
+				with open(path.join(environ['OTHER_SHEETS'], element.attrib['href'])) as cssf:
+					cssf_contents = cssf.read()
+					inliner.with_cssString(cssf_contents)
+			else:
+				with open(path.join(path.dirname(sys.argv[1]), element.attrib['href'])) as cssf:
+					cssf_contents = cssf.read()
+					inliner.with_cssString(cssf_contents)
 			element.getparent().remove(element)
 	
 	for element in root.iter('div'):
