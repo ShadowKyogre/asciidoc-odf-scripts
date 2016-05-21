@@ -51,4 +51,12 @@ with target as f:
 				link.attrib['onclick'] = "this.parentNode.nextElementSibling.classList.toggle('visible')"
 				link.addnext(contents[anno_id])
 
+	title_page = GenericTranslator().css_to_xpath('.titlepage')
+	for tpage in orightml.xpath(title_page):
+		if len(tpage[0]) == 1:
+			# only have title, titlepage border distracting
+			for el in tpage.getchildren():
+				if el.tag == 'hr':
+					tpage.remove(el)
+
 	print(etree.tostring(orightml, encoding='unicode', pretty_print=True))
