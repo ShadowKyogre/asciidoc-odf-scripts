@@ -39,5 +39,10 @@ with target  as f:
 	else:
 		inliner.with_cssString("body {color: black; background: white;}")
 
-	inliner.from_string(tostring(root, pretty_print=True, encoding='unicode')).run()
-	print(inliner.soup.prettify(formatter="html"))
+	print(
+		tostring(
+			fromstring(
+				inliner.from_string(tostring(root, pretty_print=True, encoding='unicode')).run()
+			)
+		).decode('utf-8')
+	)
